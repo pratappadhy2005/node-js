@@ -13,6 +13,7 @@ async function handleUserSignup(req, res) {
 }
 
 async function handleUserLogin(req, res) {
+  console.log(req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email, password });
 
@@ -22,11 +23,10 @@ async function handleUserLogin(req, res) {
     });
 
   const token = setUser(user);
-  //res.cookie("uid", token);
-  //return res.redirect("/");
-  return res.json({
-    token,
-  });
+
+  res.cookie("token", token);
+  return res.redirect("/");
+
 }
 
 module.exports = {
