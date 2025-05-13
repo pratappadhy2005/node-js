@@ -13,6 +13,7 @@ async function handleUserSignup(req, res) {
 }
 
 async function handleUserLogin(req, res) {
+  console.log(req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email, password });
 
@@ -21,10 +22,11 @@ async function handleUserLogin(req, res) {
       error: "Invalid Username or Password",
     });
 
-  const sessionId = uuidv4();
-  setUser(sessionId, user);
-  res.cookie("uid", sessionId);
+  const token = setUser(user);
+
+  res.cookie("token", token);
   return res.redirect("/");
+
 }
 
 module.exports = {
