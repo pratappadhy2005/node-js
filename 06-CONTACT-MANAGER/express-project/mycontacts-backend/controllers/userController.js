@@ -39,7 +39,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 //@desc get current user
 //@route GET /api/users/current
-//@access public
+//@access private
 const getCurrentUser = asyncHandler(async (req, res) => {
 
     res.status(200).json(req.user);
