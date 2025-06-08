@@ -51,8 +51,6 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
-
 //pre hook
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
@@ -66,6 +64,8 @@ userSchema.pre("save", async function (next) {
         next(error);
     }
 })
+
+const User = mongoose.model("User", userSchema);
 
 //method to compare password
 userSchema.methods.comparePassword = async function (password) {
