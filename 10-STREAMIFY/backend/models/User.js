@@ -65,15 +65,15 @@ userSchema.pre("save", async function (next) {
     }
 })
 
-const User = mongoose.model("User", userSchema);
-
 //method to compare password
-userSchema.methods.comparePassword = async function (password) {
+userSchema.methods.matchPassword = async function (password) {
     try {
         return await bcrypt.compare(password, this.password);
     } catch (error) {
         throw error;
     }
 }
+
+const User = mongoose.model("User", userSchema);
 
 export default User;
