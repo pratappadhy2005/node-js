@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
+import { upsertStreamUser } from '../lib/stream.js';
 
 export const signup = async (req, res) => {
     const body = req.body;
@@ -151,7 +152,16 @@ export const onboard = async (req, res) => {
             })
         }
 
-        //TODO: Create the user in STREAM as well
+        try {
+            await upsertStreamUser({
+                id: updatedUser._id.toString(),
+                name: updatedUser.fullName,
+                image: updatedUser.profilePic || ""
+            })
+            console.log(`Stream user updated after onboarding for ${updatedUser.fullName}`)
+        } catch (streamError) {
+            console.log("Error updating stream user", streamError.message)
+        }
 
         res.status(200).json({
             success: true,
