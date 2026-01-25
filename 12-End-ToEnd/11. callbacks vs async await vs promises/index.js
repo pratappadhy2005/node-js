@@ -14,9 +14,7 @@ Promise.resolve().then(() => console.log("B3"));
 
 console.log("B4");
 
-/**
- * B1 B4 A1  B4 A2 B3 B2
- */
+
 console.log("================");
 
 async function a1() {
@@ -34,6 +32,8 @@ a1();
 Promise.resolve().then(() => console.log("B33"));
 
 console.log("B44");
+
+console.log("================");
 
 // Write execution order with comments 
 
