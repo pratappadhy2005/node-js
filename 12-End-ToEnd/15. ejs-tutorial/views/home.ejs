@@ -1,0 +1,13 @@
+<h1>Home Page</h1>
+
+<!-- include the header component -->
+<%- include('components/header.ejs') %>
+
+<ul>
+    <% products.forEach(product => { %>
+        <li><%= product.name %></li>
+    <% }) %>
+</ul>
+
+<!-- include the footer component -->
+<%- include('components/footer.ejs') %>
